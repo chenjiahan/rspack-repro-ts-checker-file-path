@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import TsChecker from "fork-ts-checker-webpack-plugin";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isRunningWebpack = !!process.env.WEBPACK;
@@ -18,7 +19,10 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  resolve: {
+    extensions: ["...", ".ts"],
+  },
+  plugins: [new HtmlWebpackPlugin(), new TsChecker()],
   output: {
     clean: true,
     path: isRunningWebpack
